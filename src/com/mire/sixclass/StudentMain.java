@@ -8,55 +8,55 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StudentMain {
-	//»ó¼ö ÆĞÅÏ¸ÅÄ¡
+	//ìƒìˆ˜ íŒ¨í„´ë§¤ì¹˜
 	public static final int NAME = 1, YEAR = 2, GROUP = 3, ID = 4;
-	//»ó¼ö ¸ŞÀÎ ¸Ş´º
+	//ìƒìˆ˜ ë©”ì¸ ë©”ë‰´
 	public static final int INSERT = 1, SEARCH = 2, DELETE = 3, UPDATE = 4, PRINT = 5, SORT = 6, EXIT = 7;
-	//»ó¼ö °ú¸ñ¼ö
+	//ìƒìˆ˜ ê³¼ëª©ìˆ˜
 	private static final double SUBJECT_COUNT = 3;
-	//scan °´Ã¼ »ı¼º
+	//scan ê°ì²´ ìƒì„±
 	public static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		boolean flag = false;
 
 		while (!flag) {
-			int no = selectMenu(); // ¸Ş´º ¼±ÅÃ ÇÔ¼ö
+			int no = selectMenu(); // ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
 
 			switch (no) {
 			case INSERT:
-				StudentInsert(); // »ğÀÔ
+				StudentInsert(); // ì‚½ì…
 				break;
 			case SEARCH:
-				StudentSearch(); // °Ë»ö
+				StudentSearch(); // ê²€ìƒ‰
 				break;
 			case DELETE:
-				StudentDelete(); // »èÁ¦
+				StudentDelete(); // ì‚­ì œ
 				break;
 			case UPDATE:
-				StudentUpdate(); // ¼öÁ¤
+				StudentUpdate(); // ìˆ˜ì •
 				break;
 			case PRINT:
-				StudentPrint(); // Ãâ·Â
+				StudentPrint(); // ì¶œë ¥
 				break;
 			case SORT:
-				StudentSort(); // Á¤·Ä
+				StudentSort(); // ì •ë ¬
 				break;
 			case EXIT:
-				flag = true; // Á¾·á
-				System.out.println("Á¾·á µÇ¾ú½À´Ï´Ù!");
+				flag = true; // ì¢…ë£Œ
+				System.out.println("ì¢…ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤!");
 				break;
 			default:
-				System.out.println("´Ù½Ã ÀÔ·Â¿ä¸Á!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ìš”ë§!");
 				break;
 			}
 		}
 	}
 
-	// ÇĞ»ı Á¤º¸ »ğÀÔ ÇÔ¼ö 
+	// í•™ìƒ ì •ë³´ ì‚½ì… í•¨ìˆ˜ (StudentInsert())
 	private static void StudentInsert() {
 		
-		// ÀÔ·Â ¹Ş¾Æ¾ß ÇÒ Áö¿ªº¯¼ö ¼±¾ğ
+		// ì…ë ¥ ë°›ì•„ì•¼ í•  ì§€ì—­ë³€ìˆ˜ ì„ ì–¸
 		String name = null;
 		String year = null;
 		String gender = null;
@@ -68,114 +68,115 @@ public class StudentMain {
 		double avr = 0.0;
 		int rank = 0;
 
-		// ÀÌ¸§
+		// ì´ë¦„
 		while (true) {
-			System.out.print("ÀÌ¸§(È«±æµ¿) ÀÔ·Â >> ");
+			System.out.print("ì´ë¦„(í™ê¸¸ë™) ì…ë ¥ >> ");
 			name = scan.nextLine();
 
 			if (patternCheck(name, NAME)) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		}
-		// ÇĞ³â
+		// í•™ë…„
 		while (true) {
-			System.out.print("Áe³â(1~4ÇĞ³â) ÀÔ·Â >> ");
+			System.out.print("í–‘ë…„(1~4í•™ë…„) ì…ë ¥ >> ");
 			year = scan.nextLine();
 
 			if (patternCheck(year, YEAR)) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		}
 		
+		//ì„±ë³„
 		while (true) {
-			System.out.print("¼ºº°(³²ÀÚ, ¿©ÀÚ) ÀÔ·Â >> ");
+			System.out.print("ì„±ë³„(ë‚¨ì, ì—¬ì) ì…ë ¥ >> ");
 			gender = scan.nextLine();
 
-			if (gender.equals("³²ÀÚ") || gender.equals("¿©ÀÚ")) {
+			if (gender.equals("ë‚¨ì") || gender.equals("ì—¬ì")) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 
-		// ÇĞ¹ø
+		// í•™ë²ˆ
 		while (true) {
-			System.out.print("ÇĞ¹ø (1000~1999) ÀÔ·Â >> ");
+			System.out.print("í•™ë²ˆ (1000~1999) ì…ë ¥ >> ");
 			id = scan.nextLine();
 
 			if (patternCheck(id, ID)) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		}
 
-		// ±¹¾î Á¡¼ö
+		// êµ­ì–´ ì ìˆ˜
 		while (true) {
-			System.out.print("±¹¾î Á¡¼ö(0~100) ÀÔ·Â >> ");
+			System.out.print("êµ­ì–´ ì ìˆ˜(0~100) ì…ë ¥ >> ");
 			kor = scan.nextInt();
 
 			if (kor >= 0 && kor <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 
-		// ¼öÇĞ Á¡¼ö
+		// ìˆ˜í•™ ì ìˆ˜
 		while (true) {
-			System.out.print("¼öÇĞ Á¡¼ö(0~100) ÀÔ·Â >> ");
+			System.out.print("ìˆ˜í•™ ì ìˆ˜(0~100) ì…ë ¥ >> ");
 			math = scan.nextInt();
 
 			if (math >= 0 && math <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
-		// ¿µ¾î Á¡¼ö
+		// ì˜ì–´ ì ìˆ˜
 		while (true) {
-			System.out.print("¿µ¾î Á¡¼ö(0~100) ÀÔ·Â >> ");
+			System.out.print("ì˜ì–´ ì ìˆ˜(0~100) ì…ë ¥ >> ");
 			eng = scan.nextInt();
 			scan.nextLine();
 
 			if (eng >= 0 && eng <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 		
-		//StudentModel °´Ã¼ »ı¼º
+		//StudentModel ê°ì²´ ìƒì„±
 		StudentModel sm = new StudentModel(name, year, gender, id, kor, math, eng, total, avr, rank);
 
 		total = sm.calTotal();
 		avr = sm.calAverage();
 		rank = sm.calRank();
-
+		
 		int returnValue = DBController.StudentInsert(sm);
 		
 		if (returnValue != 0 ) {
-			System.out.println(sm.getName() + "´Ô »ğÀÔ ¼º°øÇÏ¿´½À´Ï´Ù");
+			System.out.println(sm.getName() + "ë‹˜ ì‚½ì… ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤");
 		} else {
-			System.out.println(sm.getName() + "´Ô »ğÀÔ ½ÇÆĞÇÏ¿´½À´Ï´Ù.(ÀÌÀ¯: Áßº¹µÈ ÇĞ¹ø)");
+			System.out.println(sm.getName() + "ë‹˜ ì‚½ì… ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.(ì´ìœ : ì¤‘ë³µëœ í•™ë²ˆ)");
 		}
 		
 	}
 	
-	//ÇĞ»ı Á¤º¸ °Ë»ö ÇÔ¼ö
+	//í•™ìƒ ì •ë³´ ê²€ìƒ‰ í•¨ìˆ˜ (StudentSearch())
 	private static void StudentSearch() {
-		//»ó¼ö °Ë»ö¸Ş´º
+		//ìƒìˆ˜ ê²€ìƒ‰ë©”ë‰´
 		final int ID_NUM = 1, NAME_NUM = 2, GENDER_NUM = 3,  EXIT = 4;
 		
-		//ArrayList<StudentModel> °´Ã¼ »ı¼º
+		//ArrayList<StudentModel> ê°ì²´ ìƒì„±
 		List<StudentModel> list = new ArrayList<StudentModel>();
 
-		// °Ë»öÇÒ ³»¿ëÀ» ¼±ÅÃ¿äÃ»(ÀüÈ­¹øÈ£, ÀÌ¸§, ¼ºº°)
+		// ê²€ìƒ‰í•  ë‚´ìš©ì„ ì„ íƒìš”ì²­(í•™ë²ˆ, ì´ë¦„, ì„±ë³„)
 		String id = null;
 		String name = null;
 		String searchData = null;
@@ -184,20 +185,20 @@ public class StudentMain {
 		int number = 0;
 		int no = 0;
 		
-		//°Ë»ö ¸Ş´º ÇÔ¼ö
+		//ê²€ìƒ‰ ë©”ë‰´ í•¨ìˆ˜
 		no = searchMenu();
 
 		switch (no) {
 		case ID_NUM:
-			// ÇĞ¹ø
+			// í•™ë²ˆ
 			while (true) {
-				System.out.print("ÇĞ¹ø(1000 ~ 1999) ÀÔ·Â >> ");
+				System.out.print("í•™ë²ˆ(1000 ~ 1999) ì…ë ¥ >> ");
 				id = scan.nextLine();
 
 				if (patternCheck(id, ID)) {
 					break;
 				} else {
-					System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+					System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				}
 
 			}
@@ -206,15 +207,15 @@ public class StudentMain {
 			break;
 
 		case NAME_NUM:
-			// ÀÌ¸§
+			// ì´ë¦„
 			while (true) {
-				System.out.print("ÀÌ¸§ (È«±æµ¿) ÀÔ·Â>> ");
+				System.out.print("ì´ë¦„ (í™ê¸¸ë™) ì…ë ¥>> ");
 				name = scan.nextLine();
 
 				if (patternCheck(name, NAME)) {
 					break;
 				} else {
-					System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+					System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				}
 			}
 			searchData = name;
@@ -222,15 +223,15 @@ public class StudentMain {
 			break;
 			
 		case GENDER_NUM:
-			// ¼ºº°
+			// ì„±ë³„
 			while (true) {
-				System.out.print("¼ºº° (³²ÀÚ, ¿©ÀÚ)ÀÔ·Â>> ");
+				System.out.print("ì„±ë³„ (ë‚¨ì, ì—¬ì)ì…ë ¥>> ");
 				gender = scan.nextLine();
 
-				if (gender.equals("³²ÀÚ") || gender.equals("¿©ÀÚ")) {
+				if (gender.equals("ë‚¨ì") || gender.equals("ì—¬ì")) {
 					break;
 				} else {
-					System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+					System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				}
 			}
 			searchData = gender;
@@ -238,7 +239,7 @@ public class StudentMain {
 			break;
 
 		case EXIT:
-			System.out.println("°Ë»öÀÌ Ãë¼Ò µÇ¾ú½À´Ï´Ù");
+			System.out.println("ê²€ìƒ‰ì´ ì·¨ì†Œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 			flag = true;
 			break;
 		}
@@ -247,20 +248,20 @@ public class StudentMain {
 			return;
 		}
 		
-		// DBController list°ªÀ» ¹Ş¾Æ ÇĞ»ı Á¤º¸ °Ë»ö
+		// DBController listê°’ì„ ë°›ì•„ í•™ìƒ ì •ë³´ ê²€ìƒ‰
 		list = DBController.studentSearch(searchData, number);
 
 		if (list.size() <= 0) {
-			System.out.println(searchData + " ªOÁö ¸øÇß½À´Ï´Ù.");
+			System.out.println(searchData + " ì°¿ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 		
-		//ÇĞ»ıÁ¤º¸ Ãâ·Â
+		//í•™ìƒì •ë³´ ì¶œë ¥
 		for (StudentModel data : list) {
 			System.out.println(data);
 		}
 	}
-	// ÇĞ»ı Á¤º¸»èÁ¦ ÇÔ¼ö  
+	// í•™ìƒ ì •ë³´ì‚­ì œ í•¨ìˆ˜(í•™ë²ˆ) 
 	private static void StudentDelete() {
 		final int PHONE_NUM = 1;
 		String id = null;
@@ -268,39 +269,39 @@ public class StudentMain {
 		int number = 0;
 		int resultNumber = 0;
 
-		// ÇĞ¹ø
+		// í•™ë²ˆ
 		while (true) {
-			System.out.print("ÇĞ¹ø(1000-1999) ÀÔ·Â >> ");
+			System.out.print("í•™ë²ˆ(1000-1999) ì…ë ¥ >> ");
 			id = scan.nextLine();
 
 			if (patternCheck(id, ID)) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		}
 		deleteData = id;
 		number = PHONE_NUM;
 		
-		//DBController¿¡¼­ °ªÀ» ¹Ş¾Æ ÇĞ»ıÁ¤º¸»èÁ¦
+		//DBControllerì—ì„œ ê°’ì„ ë°›ì•„ í•™ìƒì •ë³´ì‚­ì œ
 		resultNumber = DBController.studentDelete(deleteData, number);
 
 		if (resultNumber != 0) {
-			System.out.println(id + "¹ø" + " ÇØ´ç ÇĞ»ıÁ¤º¸ »èÁ¦¿Ï·áÇß½À´Ï´Ù.");
+			System.out.println(id + "ë²ˆ" + " í•´ë‹¹ í•™ìƒì •ë³´ ì‚­ì œì™„ë£Œí–ˆìŠµë‹ˆë‹¤.");
 		} else {
-			System.out.println(id + "¹ø" + " ÇØ´ç ÇĞ»ıÁ¤º¸ »èÁ¦½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println(id + "ë²ˆ" + " í•´ë‹¹ í•™ìƒì •ë³´ ì‚­ì œì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		}
 		return;
 	}
 	
-	// ÇĞ»ı Á¤º¸ ¼öÁ¤ ÇÔ¼ö (StudentUpdate())
+	// í•™ìƒ ì •ë³´ ìˆ˜ì • í•¨ìˆ˜ (StudentUpdate())
 	private static void StudentUpdate() {
 		final int ID_NUM = 1;
 		
-		//ArrayList<StudentModel> °´Ã¼ »ı¼º
+		//ArrayList<StudentModel> ê°ì²´ ìƒì„±
 		List<StudentModel> list = new ArrayList<StudentModel>();
 
-		// ¼öÁ¤ÇÒ ³»¿ëÀ» ¼±ÅÃ¿äÃ»(ÇĞ¹ø)
+		// ìˆ˜ì •í•  ë‚´ìš©ì„ ì„ íƒìš”ì²­(í•™ë²ˆ)
 		String name = null;
 		String year = null;
 		String gender = null;
@@ -317,25 +318,25 @@ public class StudentMain {
 		int no = 0;
 		int resultNumber = 0;
 
-		// ÇĞ¹ø
+		// í•™ë²ˆ
 		while (true) {
-			System.out.print("¼öÁ¤ÇÒ ÇĞ¹ø(1000~1999) ÀÔ·Â >> ");
+			System.out.print("ìˆ˜ì •í•  í•™ë²ˆ(1000~1999) ì…ë ¥ >> ");
 			id = scan.nextLine();
 
 			if (patternCheck(id, ID)) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		}
 		searchData = id;
 		number = ID_NUM;
 		
-		//DBController list°ªÀ» ¹Ş¾Æ ÇĞ»ı Á¤º¸ °Ë»ö
+		//DBController listê°’ì„ ë°›ì•„ í•™ìƒ ì •ë³´ ê²€ìƒ‰
 		list = DBController.studentSearch(searchData, number);
 
 		if (list.size() <= 0) {
-			System.out.println(searchData + " ªOÁö ¸øÇß½À´Ï´Ù.");
+			System.out.println(searchData + " ì°¿ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 		StudentModel data_buffer = null;
@@ -344,68 +345,68 @@ public class StudentMain {
 			data_buffer = data;
 		}
 
-		// 2. ÇĞ¹ø°¡ ÀÖÀ¸¸é ¼öÁ¤ÇÒ Á¡¼ö¸¦ ¹Ş¾Æ¼­ ¼öÁ¤¿äÃ»
+		// 2. í•™ë²ˆê°€ ìˆìœ¼ë©´ ìˆ˜ì •í•  ì ìˆ˜ë¥¼ ë°›ì•„ì„œ ìˆ˜ì •ìš”ì²­
 		while (true) {
-			System.out.print("±âÁ¸ ±¹¾îÁ¡¼ö: [" + data_buffer.getKor() + "] \n¼öÁ¤ÇÒ ±¹¾îÁ¡¼ö ÀÔ·Â: ");
+			System.out.print("ê¸°ì¡´ êµ­ì–´ì ìˆ˜: [" + data_buffer.getKor() + "] \nìˆ˜ì •í•  êµ­ì–´ì ìˆ˜ ì…ë ¥: ");
 			kor = scan.nextInt();
 
 			if (kor >= 0 && kor <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 		while (true) {
-			System.out.print("±âÁ¸ ¼öÇĞÁ¡¼ö: [" + data_buffer.getMath() + "] \n¼öÁ¤ÇÒ ¼öÇĞ Á¡¼ö ÀÔ·Â: ");
+			System.out.print("ê¸°ì¡´ ìˆ˜í•™ì ìˆ˜: [" + data_buffer.getMath() + "] \nìˆ˜ì •í•  ìˆ˜í•™ ì ìˆ˜ ì…ë ¥: ");
 			math = scan.nextInt();
 
 			if (math >= 0 && math <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 		while (true) {
-			System.out.print("±âÁ¸ ¿µ¾îÁ¡¼ö: [" + data_buffer.getKor() + "] \n¼öÁ¤ÇÒ ¿µ¾î Á¡¼ö ÀÔ·Â: ");
+			System.out.print("ê¸°ì¡´ ì˜ì–´ì ìˆ˜: [" + data_buffer.getKor() + "] \nìˆ˜ì •í•  ì˜ì–´ ì ìˆ˜ ì…ë ¥: ");
 			eng = scan.nextInt();
 			scan.nextLine();
 
 			if (eng >= 0 && eng <= 100) {
 				break;
 			} else {
-				System.out.println("´Ù½Ã ÀÔ·Â ¹Ù¶ø´Ï´Ù");
+				System.out.println("ë‹¤ì‹œ ì…ë ¥ ë°”ëë‹ˆë‹¤");
 			}
 		}
 		
-		//StudentModel °´Ã¼ »ı¼º
+		//StudentModel ê°ì²´ ìƒì„±
 		StudentModel sm = new StudentModel(name, year, gender, id, kor, math, eng, total, avr, rank);
 
 		total = sm.calTotal();
 		avr = sm.calAverage();
 		rank = sm.calRank();
 
-		// 3. °á°ú°ª È®ÀÎ4
+		// 3. ê²°ê³¼ê°’ í™•ì¸4
 		resultNumber = DBController.studentUpdata(id, kor, math, eng, total, avr, rank);
 
 		if (resultNumber != 0) {
-			System.out.println(id + " ¹øÈ£ ¼öÁ¤¿Ï·áÇß½À´Ï´Ù.");
+			System.out.println(id + " ë²ˆí˜¸ ìˆ˜ì •ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.");
 		} else {
-			System.out.println(id + " ¹øÈ£ ¼öÁ¤½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println(id + " ë²ˆí˜¸ ìˆ˜ì •ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		}
 		return;
 	}
 	
-	//ÇĞ»ı Á¤º¸ Ãâ·Â (StudentPrint())
+	//í•™ìƒ ì •ë³´ ì¶œë ¥ (StudentPrint())
 	private static void StudentPrint() {
 		
-		//ArrayList<StudentModel> °´Ã¼ »ı¼º
+		//ArrayList<StudentModel> ê°ì²´ ìƒì„±
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		
-		//DBController¿¡¼­ list°ªÀ» Àü´Ş¹Ş¾Æ ÇĞ»ı Á¤º¸ º¸¿©ÁØ´Ù
+		//DBControllerì—ì„œ listê°’ì„ ì „ë‹¬ë°›ëŠ”ë‹¤
 		list = DBController.PhoneBookeSelect();
 
 		if (list.size() <= 0) {
-			System.out.println("Ãâ·ÂÇÒ ÇĞ»ı Á¤º¸ ³»¿ëÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("ì¶œë ¥í•  í•™ìƒ ì •ë³´ ë‚´ìš©ì´ ì—†ìŠµë‹ˆë‹¤.");
 			return;
 		}
 		for (StudentModel data : list) {
@@ -413,40 +414,40 @@ public class StudentMain {
 		}
 	}
 	
-	//ÇĞ»ı Á¤º¸ Á¤·Ä
+	//í•™ìƒ ì •ë³´ ì •ë ¬(StudentSort())
 	private static void StudentSort() {
-		//ArrayList<StudentModel> °´Ã¼ »ı¼º
+		//ArrayList<StudentModel> ê°ì²´ ìƒì„±
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		int no = 0;
 		boolean flag = false;
 
-		// 1. Á¤·Ä¹æ½Ä(¿À¸§Â÷¼ø , ³»¸²Â÷¼ø)
+		// 1. ì •ë ¬ë°©ì‹(ì˜¤ë¦„ì°¨ìˆœ , ë‚´ë¦¼ì°¨ìˆœ)
 		while (!flag) {
 			System.out.println("***************************");
-			System.out.println("1. ¿À¸§Â÷¼ø(ÃÑÁ¡), 2. ³»¸²Â÷¼ø(ÃÑÁ¡)");
+			System.out.println("1. ì˜¤ë¦„ì°¨ìˆœ(ì´ì ), 2. ë‚´ë¦¼ì°¨ìˆœ(ì´ì )");
 			System.out.println("***************************");
-			System.out.print("Á¤·Ä¹æ½Ä ¼±ÅÃ>> ");
+			System.out.print("ì •ë ¬ë°©ì‹ ì„ íƒ>> ");
 			try {
 				no = Integer.parseInt(scan.nextLine());
 			} catch (InputMismatchException e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			} catch (Exception e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			}
 			if (no >= 1 && no <= 2) {
 				flag = true;
 			} else {
-				System.out.println("°æ°í: (1~2)¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : (1~2)ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		} // end of while
 
-		// 2. Ãâ·Â¹®À» °¡Á®¿Â´Ù.
+		// 2. ì¶œë ¥ë¬¸ì„ ê°€ì ¸ì˜¨ë‹¤.
 		list = DBController.StudentSort(no);
 
 		if (list.size() <= 0) {
-			System.out.println("Á¤·ÄµÈ ³»¿ëÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("ì •ë ¬ëœ ë‚´ìš©ì´ ì—†ìŠµë‹ˆë‹¤.");
 			return;
 		}
 		for (StudentModel data : list) {
@@ -457,14 +458,14 @@ public class StudentMain {
 
 	}
 	
-	//ÆĞÅÏ ¸ÅÄª (patternCheck()) 
+	//íŒ¨í„´ ë§¤ì¹­ (patternCheck()) 
 	private static boolean patternCheck(String patternData, int patternType) {
 
 		String filter = null;
 
 		switch (patternType) {
 		case NAME:
-			filter = "^[°¡-ÆR]{2,5}$";
+			filter = "^[ê°€-í£]{2,5}$";
 			break;
 		case YEAR:
 			filter = "[1-4]";
@@ -480,7 +481,7 @@ public class StudentMain {
 		return matcher.matches();
 	}
 	
-	// ¸ŞÀÎ ¸Ş´º ¼±ÅÃ (selectMenu())
+	// ë©”ì¸ ë©”ë‰´ ì„ íƒ (selectMenu())
 	private static int selectMenu() {
 		boolean flag = false;
 		int no = 0;
@@ -488,51 +489,51 @@ public class StudentMain {
 		while (!flag) {
 
 			System.out.println("**************************************");
-			System.out.println("1.ÀÔ·Â 2.Á¶È¸ 3.»èÁ¦ 4.¼öÁ¤ 5.Ãâ·Â 6.Á¤·Ä 7.Á¾·á");
+			System.out.println("1.ì…ë ¥ 2.ì¡°íšŒ 3.ì‚­ì œ 4.ìˆ˜ì • 5.ì¶œë ¥ 6.ì •ë ¬ 7.ì¢…ë£Œ");
 			System.out.println("**************************************");
-			System.out.print("¹øÈ£ ¼±ÅÃ >> ");
+			System.out.print("ë²ˆí˜¸ ì„ íƒ >> ");
 			try {
 				no = Integer.parseInt(scan.nextLine());
 			} catch (InputMismatchException e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			} catch (Exception e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			}
 			if (no >= 1 && no <= 7) {
 				flag = true;
 			} else {
-				System.out.println("°æ°í: (1~7)¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : (1~7)ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		} // end of while
 
 		return no;
 	}
 	
-	// °Ë»ö ¸Ş´º ¼±ÅÃ (searchMenu())
+	// ê²€ìƒ‰ ë©”ë‰´ ì„ íƒ (searchMenu())
 	private static int searchMenu() {
 		boolean flag = false;
 		int no = 0;
 
 		while (!flag) {
 			System.out.println("************************");
-			System.out.println("1.¹øÈ£ 2.ÀÌ¸§ 3.¼ºº° 4.Á¾·á ");
+			System.out.println("1.ë²ˆí˜¸ 2.ì´ë¦„ 3.ì„±ë³„ 4.ì¢…ë£Œ ");
 			System.out.println("************************");
-			System.out.print("¹øÈ£ ¼±ÅÃ >> ");
+			System.out.print("ë²ˆí˜¸ ì„ íƒ >> ");
 			try {
 				no = Integer.parseInt(scan.nextLine());
 			} catch (InputMismatchException e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			} catch (Exception e) {
-				System.out.println("°æ°í: ¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 				continue;
 			}
 			if (no >= 1 && no <= 3) {
 				flag = true;
 			} else {
-				System.out.println("°æ°í: (1~4)¼ıÀÚ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+				System.out.println("ê²½ê³ : (1~4)ìˆ«ì ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			}
 		} // end of while
 
