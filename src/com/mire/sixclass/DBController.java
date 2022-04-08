@@ -10,12 +10,12 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class DBController {
 
-	// Á¤Àû¸â¹öÇÔ¼ö(DB»ğÀÔ)(Å×ÀÌºí ¸ğµ¨°´Ã¼ »ğÀÔ)
+	// ì •ì ë©¤ë²„í•¨ìˆ˜(DBì‚½ì…)(í…Œì´ë¸” ëª¨ë¸ê°ì²´ ì‚½ì…)
 	public static int StudentInsert(StudentModel studentModel) {
 
-		int returnValue = 0; // µ¥ÀÌÅ¸º£ÀÌ½º ¸í·É¹® ¸®ÅÏ°ª
+		int returnValue = 0; // ë°ì´íƒ€ë² ì´ìŠ¤ ëª…ë ¹ë¬¸ ë¦¬í„´ê°’
 
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 
 		if (con == null) {
@@ -23,7 +23,7 @@ public class DBController {
 			return 0;
 		}
 
-		// 2.¸í·É¹® ÇÏ´Ş(»ğÀÔ¸í·É¹® ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹® ÇÏ´Ş : insert)
+		// 2.ëª…ë ¹ë¬¸ í•˜ë‹¬(ì‚½ì…ëª…ë ¹ë¬¸ í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸ í•˜ë‹¬ : insert)
 		String insertQuery = "insert into studentdb.studenttbl values(?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = null;
 		try {
@@ -39,8 +39,8 @@ public class DBController {
 			ps.setInt(8, studentModel.getTotal());
 			ps.setDouble(9, studentModel.getAvr());
 			ps.setInt(10, studentModel.getRank());
-			// 2.2 query ¸í·É¹® ½ÇÇà
-			// 3.¸®ÅÏ°ª(»ğÀÔÇÑ °¹¼ö¸¦ ¸®ÅÏÇÑ´Ù.)
+			// 2.2 query ëª…ë ¹ë¬¸ ì‹¤í–‰
+			// 3.ë¦¬í„´ê°’(ì‚½ì…í•œ ê°¯ìˆ˜ë¥¼ ë¦¬í„´í•œë‹¤.)
 			returnValue = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -48,11 +48,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -61,35 +61,35 @@ public class DBController {
 			}
 		}
 
-		// 4.°á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 4.ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return returnValue;
 	}
 
-	// Á¤Àû¸â¹öÇÔ¼ö(Å×ÀÌºí ¸ğµ¨°´Ã¼ º¸¿©ÁÖ±â)
+	// ì •ì ë©¤ë²„í•¨ìˆ˜(í…Œì´ë¸” ëª¨ë¸ê°ì²´ ë³´ì—¬ì£¼ê¸°)
 	public static List<StudentModel> PhoneBookeSelect() {
-		// Å×ÀÌºí¿¡ ÀÖ´Â ·¹ÄÚµå ¼ÂÀ» °¡Á®¿À±â À§ÇÑ ArrayList<StudentModel>
+		// í…Œì´ë¸”ì— ìˆëŠ” ë ˆì½”ë“œ ì…‹ì„ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ ArrayList<StudentModel>
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 		if (con == null) {
 			System.out.println("Mysql Connection Fail");
 			return null;
 		}
 		
-		// 2.¸í·É¹® ÇÏ´Ş(select Äõ¸®¹® ¸í·É¹® ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹® ÇÏ´Ş : select * from studentdb.studenttbl;)
+		// 2.ëª…ë ¹ë¬¸ í•˜ë‹¬(select ì¿¼ë¦¬ë¬¸ ëª…ë ¹ë¬¸ í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸ í•˜ë‹¬ : select * from studentdb.studenttbl;)
 		String selectQuery = "select * from studentdb.studenttbl";
 		PreparedStatement ps = null;
 		ResultSet resultSet = null;
 		try {
-			// 2.1 insert query binding
+			// 2.1 select query binding
 			ps = (PreparedStatement) con.prepareStatement(selectQuery);
 
-			// 2.2 query ¸í·É¹® ½ÇÇà (select Äõ¸®¹®)
-			// 3.¸®ÅÏ°ª(·¹ÄÚµå ¼Â = resultSet¸®ÅÏÇÑ´Ù.) ±¸º°: executeUpdata() ¿Í executeQurey() ±¸º° ÇÒ¼öÀÖ´Â°¡?
+			// 2.2 query ëª…ë ¹ë¬¸ ì‹¤í–‰ (select ì¿¼ë¦¬ë¬¸)
+			// 3.ë¦¬í„´ê°’(ë ˆì½”ë“œ ì…‹ = resultSetë¦¬í„´í•œë‹¤.)
 			resultSet = ps.executeQuery();
 
-			// ·¹ÄÚµå¼ÂÀ» ¸®½ºÆ®°¡ °¡Á®¿Â´Ù
+			// ë ˆì½”ë“œì…‹ì„ ë¦¬ìŠ¤íŠ¸ê°€ ê°€ì ¸ì˜¨ë‹¤
 			while (resultSet.next()) {
 				String name = resultSet.getString(1);
 				String year = resultSet.getString(2);
@@ -113,11 +113,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -126,27 +126,27 @@ public class DBController {
 			}
 		}
 
-		// 3.¸®ÅÏ°ª(»ğÀÔÇÑ °¹¼ö¸¦ ¸®ÅÏÇÑ´Ù.)
-		// 4.°á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 3.ë¦¬í„´ê°’(ì‚½ì…í•œ ê°¯ìˆ˜ë¥¼ ë¦¬í„´í•œë‹¤.)
+		// 4.ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return list;
 
 	}
 
-	// Á¤Àû¸â¹öÇÔ¼ö(Å×ÀÌºí °Ë»öÇÏ±â: ÇĞ¹ø(ÇĞ¹ø³»¿ë,1) ÀÌ¸§(ÀÌ¸§³»¿ë,2))
+	// ì •ì ë©¤ë²„í•¨ìˆ˜(í…Œì´ë¸” ê²€ìƒ‰í•˜ê¸°: í•™ë²ˆ(í•™ë²ˆë‚´ìš©,1) ì´ë¦„(ì´ë¦„ë‚´ìš©,2) ì„±ë³„(ì„±ë³„ë‚´ìš©,3))
 	public static List<StudentModel> studentSearch(String searchData, int number) {
 		final int ID_NUM = 1, NAME_NUM = 2, GENDER_NUM = 3;
 		
-		// ·¹ÄÚµå¼ÂÀ» ÀúÀåÀ» List Collection
+		// ë ˆì½”ë“œì…‹ì„ ì €ì¥ì„ List Collection
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 		if (con == null) {
 			System.out.println("Mysql Connection Fail");
 			return null;
 		}
 
-		// ¸í·É¹® ÇÏ´Ş(°Ë»ö¸í·É¹®ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹®ÇÏ´Ş : select * from studentdb.studenttbl where ~)
+		// ëª…ë ¹ë¬¸ í•˜ë‹¬(ê²€ìƒ‰ëª…ë ¹ë¬¸í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸í•˜ë‹¬ : select * from studentdb.studenttbl where ~)
 		String searchQuery = null;
 		PreparedStatement ps = null;
 		ResultSet resultSet = null;
@@ -168,11 +168,11 @@ public class DBController {
 			ps = (PreparedStatement) con.prepareStatement(searchQuery);
 			searchData = "%" + searchData + "%";
 			ps.setString(1, searchData);
-			// 2.2 ¸í·É¹® ½ÇÇà
-			// 3. ¸®ÅÏ°ª (·¹ÄÚµå ¼Â = resultSet ¸®ÅÏÇÑ´Ù.) ±¸º°: executeUpdata() ¿Í executeQurey() ±¸º°ÇÒ¼öÀÖ´Â°¡?
+			// 2.2 ëª…ë ¹ë¬¸ ì‹¤í–‰
+			// 3. ë¦¬í„´ê°’ (ë ˆì½”ë“œ ì…‹ = resultSet ë¦¬í„´í•œë‹¤.) 
 			resultSet = ps.executeQuery();
 			
-			// 3.1 ¸®ÅÏ°ª ResultSetÀ» ArrayList<StudentModel> º¯È¯ÇÑ´Ù.
+			// 3.1 ë¦¬í„´ê°’ ResultSetì„ ArrayList<StudentModel> ë³€í™˜í•œë‹¤.
 			while (resultSet.next()) {
 				String name = resultSet.getString(1);
 				String year = resultSet.getString(2);
@@ -195,11 +195,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -207,22 +207,22 @@ public class DBController {
 				e.printStackTrace();
 			}
 		}
-		// 4. °á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 4. ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return list;
 	}
 
-	// Á¤Àû¸â¹öÇÔ¼ö(Å×ÀÌºí »èÁ¦ÇÏ±â: ÇĞ¹ø)
+	// ì •ì ë©¤ë²„í•¨ìˆ˜(í…Œì´ë¸” ì‚­ì œí•˜ê¸°: í•™ë²ˆ)
 	public static int studentDelete(String deleteData, int number) {
 		final int ID_NUM = 1;
 
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 		if (con == null) {
 			System.out.println("Mysql Connection Fail");
 			return 0;
 		}
 
-		// ¸í·É¹® ÇÏ´Ş(»èÁ¦¸í·É¹®ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹®ÇÏ´Ş : delete from studentdb.studenttbl where id like ?;)
+		// ëª…ë ¹ë¬¸ í•˜ë‹¬(ì‚­ì œëª…ë ¹ë¬¸í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸í•˜ë‹¬ : delete from studentdb.studenttbl where id like ?;)
 		String deleteQuery = null;
 		PreparedStatement ps = null;
 		int resultNumber = 0;
@@ -238,8 +238,8 @@ public class DBController {
 			ps = (PreparedStatement) con.prepareStatement(deleteQuery);
 			deleteData = "%" + deleteData + "%";
 			ps.setString(1, deleteData);
-			// 2.2 ¸í·É¹® ½ÇÇà
-			// 3. ¸®ÅÏ°ª (·¹ÄÚµå ¼Â = resultNumber ¸®ÅÏÇÑ´Ù.) ±¸º°: executeUpdata() ¿Í executeQurey() ±¸º°ÇÒ¼öÀÖ´Â°¡?
+			// 2.2 ëª…ë ¹ë¬¸ ì‹¤í–‰
+			// 3. ë¦¬í„´ê°’ (ë ˆì½”ë“œ ì…‹ = resultNumber ë¦¬í„´í•œë‹¤.) 
 			resultNumber = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -247,11 +247,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -259,21 +259,21 @@ public class DBController {
 				e.printStackTrace();
 			}
 		}
-		// 4. °á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 4. ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return resultNumber;
 	}
 
 	public static int studentUpdata(String id, int kor, int math, int eng, int total, double avr, int rank) {
 		final int ID_NUM = 1;
 
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 		if (con == null) {
 			System.out.println("Mysql Connection Fail");
 			return 0;
 		}
 
-		// ¸í·É¹® ÇÏ´Ş(¼öÁ¤¸í·É¹®ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹®ÇÏ´Ş : update studentdb.studenttbl set kor = ?, math = ?, eng = ?, total = ?, avr = ?, rank = ? where id = ?)
+		// ëª…ë ¹ë¬¸ í•˜ë‹¬(ìˆ˜ì •ëª…ë ¹ë¬¸í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸í•˜ë‹¬ : update studentdb.studenttbl set kor = ?, math = ?, eng = ?, total = ?, avr = ?, rank = ? where id = ?)
 		String updateQuery = null;
 		PreparedStatement ps = null;
 		int resultNumber = 0;
@@ -293,8 +293,8 @@ public class DBController {
 			ps.setDouble(5, avr);
 			ps.setInt(6, rank);
 			ps.setString(7, id);
-			// 2.2 ¸í·É¹® ½ÇÇà
-			// 3. ¸®ÅÏ°ª (·¹ÄÚµå ¼Â = resultNumber ¸®ÅÏÇÑ´Ù.) ±¸º°: executeUpdata() ¿Í executeQurey() ±¸º°ÇÒ¼öÀÖ´Â°¡?
+			// 2.2 ëª…ë ¹ë¬¸ ì‹¤í–‰
+			// 3. ë¦¬í„´ê°’ (ë ˆì½”ë“œ ì…‹ = resultNumber ë¦¬í„´í•œë‹¤.)
 			resultNumber = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -302,11 +302,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -314,25 +314,25 @@ public class DBController {
 				e.printStackTrace();
 			}
 		}
-		// 4. °á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 4. ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return resultNumber;
 	}
 
 	public static List<StudentModel> StudentSort(int no) {
 		final int ASC = 1, DESC = 2;
 		
-		// Å×ÀÌºí¿¡ ÀÖ´Â ·¹ÄÚµå ¼ÂÀ» °¡Á®¿À±â À§ÇÑ ArrayList<StudentModel>
+		// í…Œì´ë¸”ì— ìˆëŠ” ë ˆì½”ë“œ ì…‹ì„ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ ArrayList<StudentModel>
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		String sortQuery = null;
 		
-		// 1.µ¥ÀÌÅ¸ º£ÀÌ½º Á¢¼Ó¿äÃ»
+		// 1.ë°ì´íƒ€ ë² ì´ìŠ¤ ì ‘ì†ìš”ì²­
 		Connection con = DBUtility.getConnection();
 		if (con == null) {
 			System.out.println("Mysql Connection Fail");
 			return null;
 		}
 		
-		// 2.¸í·É¹® ÇÏ´Ş(select Äõ¸®¹® ¸í·É¹® ÇÏ´Ş: Äõ¸®¹®À¸·Î ¸í·É¹® ÇÏ´Ş : select * from studentdb.studenttbl order by total ASC / DESC;)
+		// 2.ëª…ë ¹ë¬¸ í•˜ë‹¬(sort ì¿¼ë¦¬ë¬¸ ëª…ë ¹ë¬¸ í•˜ë‹¬: ì¿¼ë¦¬ë¬¸ìœ¼ë¡œ ëª…ë ¹ë¬¸ í•˜ë‹¬ : select * from studentdb.studenttbl order by total ASC / DESC;)
 		switch (no) {
 		case ASC:
 			sortQuery = "select * from studentdb.studenttbl order by total ASC";
@@ -348,11 +348,11 @@ public class DBController {
 			// 2.1 sort query binding
 			ps = (PreparedStatement) con.prepareStatement(sortQuery);
 
-			// 2.2 query ¸í·É¹® ½ÇÇà (sort Äõ¸®¹®)
-			// 3.¸®ÅÏ°ª(·¹ÄÚµå ¼Â = resultSet¸®ÅÏÇÑ´Ù.) ±¸º°: executeUpdata() ¿Í executeQurey() ±¸º° ÇÒ¼öÀÖ´Â°¡?
+			// 2.2 query ëª…ë ¹ë¬¸ ì‹¤í–‰ (sort ì¿¼ë¦¬ë¬¸)
+			// 3.ë¦¬í„´ê°’(ë ˆì½”ë“œ ì…‹ = resultSetë¦¬í„´í•œë‹¤.)
 			resultSet = ps.executeQuery();
 
-			// ·¹ÄÚµå¼ÂÀ» ¸®½ºÆ®°¡ °¡Á®¿Â´Ù
+			// ë ˆì½”ë“œì…‹ì„ ë¦¬ìŠ¤íŠ¸ê°€ ê°€ì ¸ì˜¨ë‹¤
 			while (resultSet.next()) {
 				String name = resultSet.getString(1);
 				String year = resultSet.getString(2);
@@ -376,11 +376,11 @@ public class DBController {
 			e.printStackTrace();
 		} finally {
 			try {
-				// ps°¡ nullÀÌ ¾Æ´Ï°í ps°¡ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// psê°€ nullì´ ì•„ë‹ˆê³  psê°€ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (ps != null && !ps.isClosed()) {
 					ps.close();
 				}
-				// conÀÌ nullÀÌ ¾Æ´Ï°í conÀÌ ¾È´İ¾ÆÁ³À¸¸é ´İ¾Æ¶ó
+				// conì´ nullì´ ì•„ë‹ˆê³  conì´ ì•ˆë‹«ì•„ì¡Œìœ¼ë©´ ë‹«ì•„ë¼
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
@@ -389,8 +389,8 @@ public class DBController {
 			}
 		}
 
-		// 3.¸®ÅÏ°ª(»ğÀÔÇÑ °¹¼ö¸¦ ¸®ÅÏÇÑ´Ù.)
-		// 4.°á°ú°ªÀ» Åëº¸ÇÑ´Ù.
+		// 3.ë¦¬í„´ê°’(ì‚½ì…í•œ ê°¯ìˆ˜ë¥¼ ë¦¬í„´í•œë‹¤.)
+		// 4.ê²°ê³¼ê°’ì„ í†µë³´í•œë‹¤.
 		return list;
 	}
 }
