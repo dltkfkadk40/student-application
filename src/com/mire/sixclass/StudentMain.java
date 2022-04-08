@@ -367,7 +367,7 @@ public class StudentMain {
 			}
 		}
 		while (true) {
-			System.out.print("기존 영어점수: [" + data_buffer.getKor() + "] \n수정할 영어 점수 입력: ");
+			System.out.print("기존 영어점수: [" + data_buffer.getEng() + "] \n수정할 영어 점수 입력: ");
 			eng = scan.nextInt();
 			scan.nextLine();
 
