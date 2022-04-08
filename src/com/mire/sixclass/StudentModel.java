@@ -6,7 +6,7 @@ import java.util.Objects;
 public class StudentModel implements Comparable<Object>, Serializable {
 	public static final int SUBJECT_COUNT = 3;
 
-	// ¸â¹ö º¯¼ö (ÀÌ¸§, ÇĞ³â, ¼ºº°, ÇĞ¹ø, ±¹¾î, ¼öÇĞ, ¿µ¾î, ÃÑÁ¡, Æò±Õ, µî±Ş)
+	// ë©¤ë²„ ë³€ìˆ˜ (ì´ë¦„, í•™ë…„, ì„±ë³„, í•™ë²ˆ, êµ­ì–´, ìˆ˜í•™, ì˜ì–´, ì´ì , í‰ê· , ë“±ê¸‰)
 	private String name;
 	private String year;
 	private String gender;
@@ -18,7 +18,7 @@ public class StudentModel implements Comparable<Object>, Serializable {
 	private double avr;
 	private int rank;
 	
-	//»ı¼ºÀÚ ÇÔ¼ö
+	//ìƒì„±ì í•¨ìˆ˜
 	public StudentModel(String name, String year, String gender,String id, int kor, int math, int eng, int total, double avr,
 			int rank) {
 		super();
@@ -34,17 +34,17 @@ public class StudentModel implements Comparable<Object>, Serializable {
 		this.rank = rank;
 	}
 	
-	//ÃÑÁ¡ °è»ê ÇÔ¼ö
+	//ì´ì  ê³„ì‚° í•¨ìˆ˜(calTotal())
 	public int calTotal() {
 		return this.total = this.kor + this.math + this.eng;
 	}
 
-	//Æò±Õ °è»ê ÇÔ¼ö
+	//í‰ê·  ê³„ì‚° í•¨ìˆ˜(calAverage())
 	public double calAverage() {
 		return this.avr = this.total / (double) SUBJECT_COUNT;
 	}
 	
-	//µî±Ş °è»ê ÇÔ¼ö
+	//ë“±ê¸‰ ê³„ì‚° í•¨ìˆ˜ (calRank())
 	public int calRank() {
 
 		if (this.avr >= 90) {
@@ -70,7 +70,7 @@ public class StudentModel implements Comparable<Object>, Serializable {
 		return rank;
 	}
 	
-	// ÇØ½ÃÄÚµå
+	// í•´ì‹œì½”ë“œ(id)
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -108,16 +108,16 @@ public class StudentModel implements Comparable<Object>, Serializable {
 	// toString()
 	@Override
 	public String toString() {
-		String year_data = year + "ÇĞ³â";
-		String id_data = id + "¹ø";
-		String kor_data = kor + "Á¡";
-		String math_data = math + "Á¡";
-		String eng_data = eng + "Á¡";
-		String total_data = total + "Á¡";
-		String rank_data = rank + "µî±Ş";
+		String year_data = year + "í•™ë…„";
+		String id_data = id + "ë²ˆ";
+		String kor_data = kor + "ì ";
+		String math_data = math + "ì ";
+		String eng_data = eng + "ì ";
+		String total_data = total + "ì ";
+		String rank_data = rank + "ë“±ê¸‰";
 
 		return name + "\t" + year_data + "\t" + id_data + "\t" + gender + "\t" + kor_data + "\t" + math_data + "\t" + eng_data + "\t"
-				+ total_data + "\t" + String.format("%6.2f", avr) + "Á¡    " + rank_data;
+				+ total_data + "\t" + String.format("%6.2f", avr) + "ì     " + rank_data;
 	}
 	
 	//getter, setter
